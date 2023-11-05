@@ -3,8 +3,6 @@
 
 <p align="center">
 <a href="https://rongliu-leo.github.io/IPST/">Project Page</a>
-<a>  |  </a>
-<a href="https://arxiv.org/abs/2309.10011">Paper</a> 
 </p>
 
 
