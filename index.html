@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Instant Photorealistic Style Transfer: A Lightweight and Adaptive Approach</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <base href="/"> -->
+
+    <link rel="icon" type="image/png" href="../img/newyork.ico">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110862391-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-110862391-3');
+    </script> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h1 class="col-md-12 text-center" style="font-weight: normal;">
+                Instant Photorealistic Style Transfer:
+				<br />A Lightweight and Adaptive Approach
+                <!-- <small>  (CVPR 2023)  </small> -->
+            </h1>
+            
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div style="margin-bottom: 0.7em; margin-top:0.2em" class="authors">
+                    <a style="font-size:large;"href="https://rongliu-leo.github.io/">Rong Liu</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a style="font-size:large;"href="https://www.linkedin.com/in/enyu-zhao-564566250/">Enyu Zhao</a><sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a style="font-size:large;"href="https://www.linkedin.com/in/liuzy98/">Zhiyuan Liu</a><sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a style="font-size:large;"href="https://scholar.google.com/citations?user=JKWxGfsAAAAJ&hl=en">Andrew Feng</a><sup>2</sup>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a style="font-size:large;"href="https://viterbi.usc.edu/directory/faculty/Easley/Scott">Scott John Easley</a><sup>1</sup>
+                </div>
+
+                <div style="margin-bottom: 0.5em;" class="affiliations">
+                    <p style="color:#990000; font-size:large;"><sup>1</sup>University of Southern California</p>
+                    <p style="color:#990000; font-size:large;"><sup>2</sup>USC Institute for Creative Technologies</p> 
+                </div> 
+
+
+            </div>
+        </div>
+
+        <div style="margin-bottom: 0.7em;" class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <div class="col-xs-6">
+                            <li>
+                                <a href="https://arxiv.org/abs/2309.10011">
+                                <image src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/5cab99df4998decfbf9e218e_paper-01.png" height="50px"><br>
+                                    <h5><strong>arXiv</strong></h5>
+                                </a>
+                            </li>
+                        </div>
+                        
+                        <!-- <li>
+                            <a href="https://arxiv.org/abs/2303.14001">
+                            <image src="../img/paper.png" height="50px"><br>
+                                <h5><strong>CVPR2023</strong></h5>
+                            </a>
+                        </li> -->
+                        <!-- <li>
+                            <a href="https://github.com/city-super/BungeeNeRF">
+                            <image src="../img/github_pad.png" height="50px"><br>
+                                <h5><strong>Code (Coming)</strong></h5>
+                            </a>
+                        </li> -->
+                        <div class="col-xs-6">
+                            <li>
+                                <a href="https://github.com/RongLiu-Leo/Video-Style-Transfer">
+                                <image src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/5cae3b53b42ebb3dd4175a82_68747470733a2f2f7777772e69636f6e66696e6465722e636f6d2f646174612f69636f6e732f6f637469636f6e732f313032342f6d61726b2d6769746875622d3235362e706e67.png" height="50px"><br>
+                                    <h5><strong>Code</strong></h5>
+                                </a>
+                            </li>
+                        </div>
+                        
+                    </ul>
+                </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                
+                <video id="v12" width="100%" autoplay loop muted playsinline>
+                    <source src="asset/4k.mp4" type="video/mp4" />
+                </video>
+                <p class="text-justify">
+                    When provided with an underwater video that has a resolution of 3840x2160 pixels and operates at a 30 fps for a duration of 11 seconds, the entire transfer process is completed in just 1.53 seconds, excluding frame I/O operations.               
+                </p>
+                
+                <h3 class="text-center" style="font-weight: normal;">
+                    Abstract
+                </h3>
+                <hr style="margin-top: 0;">
+                <!-- <image src="img/teaser.png" class="img-responsive" alt="overview"><br> -->
+                            
+                <p class="text-justify">
+                    In this paper, we propose an Instant Photorealistic Style Transfer (IPST) approach, designed to achieve 
+                    instant photorealistic style transfer on super-resolution inputs without the need for pre-training on pair-wise datasets or imposing extra constraints. Our method utilizes a lightweight StyleNet to enable style transfer from a style image to a content image while preserving non-color information.
+                    To further enhance the style transfer process, we introduce an instance-adaptive optimization to prioritize the photorealism of outputs and accelerate the convergence of the style network, leading to a rapid training completion within seconds.
+                    Moreover, IPST is well-suited for multi-frame style transfer tasks, as it retains temporal and multi-view consistency of the multi-frame inputs such as video and Neural Radiance Field (NeRF).
+                    Experimental results demonstrate that IPST requires less GPU memory usage, offers faster multi-frame transfer speed, and generates photorealistic outputs, making it a promising solution for various photorealistic transfer applications.                </p>
+            </div>
+        </div>
+		
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+                <h3 class="text-center" style="font-weight: normal;">
+                    Results
+                </h3>
+                <hr style="margin-top: 0;">
+				<h4 class="text-center" style="font-weight: bolder;">
+					Image Style Transfer Comparison
+				</h4>
+                <div class="thumbnail-container" style="margin-bottom: 0px;">
+                    <button class="thumbnail1" style="background-image: url('dataset/images/input/3.jpg');" onclick="showImage('dataset/images/input/3.jpg', 'dataset/images/style/3.jpg', 'asset/images/3.jpg')"></button>
+                    <button class="thumbnail1" style="background-image: url('dataset/images/input/5.png');" onclick="showImage('dataset/images/input/5.png', 'dataset/images/style/5.png', 'asset/images/5.png')"></button>
+                    <button class="thumbnail1" style="background-image: url('dataset/images/input/1.jpg');" onclick="showImage('dataset/images/input/1.jpg', 'dataset/images/style/1.jpg', 'asset/images/1.jpg')"></button>
+                    <button class="thumbnail1" style="background-image: url('dataset/images/input/2.jpg');" onclick="showImage('dataset/images/input/2.jpg', 'dataset/images/style/2.jpg', 'asset/images/2.jpg')"></button>
+                    <button class="thumbnail1" style="background-image: url('dataset/images/input/4.png');" onclick="showImage('dataset/images/input/4.png', 'dataset/images/style/4.png', 'asset/images/4.png')"></button>
+                </div>
+
+                <div class="image-labels">
+                    <h5 style="font-weight: normal">Input</h5>
+                    <h5 style="font-weight: normal">Style</h5>
+                </div>
+
+                <div class="image-display">
+                    <img id="content" src="dataset/images/input/3.jpg" style="border-radius: 15px 0 0 15px;" alt="Displayed Image 1">
+                    <img id="style" src="dataset/images/style/3.jpg" style="border-radius: 0 15px 15px 0;" alt="Displayed Image 2">
+                </div>
+
+				<div class="image-comparison">
+					<div class="images-container">
+						<img class="before-image" id="before-image" src="dataset/images/input/3.jpg" alt="" />
+						<img class="after-image" id="after-image" src="asset/images/3.jpg" alt="" />
+				
+						<div class="slider-line"></div>
+						<div class="slider-icon">
+							<svg 
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-6 h-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+								/>
+							</svg>
+						</div>
+						
+						<input type="range" class="slider" min="0" max="100" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h4 class="text-center" style="font-weight: bolder;margin-top: 20px;margin-bottom: 0px;">
+                    Video Style Transfer Comparison
+                </h4>
+
+                <div class="image-labels">
+                    <h5 style="font-weight: normal">Input</h5>
+                    <h5 style="font-weight: normal">Style</h5>
+                </div>
+
+                <div class="vid-image-display">
+                    <!-- <div> -->
+                        <video id="vid-content" autoplay loop muted playsinline>
+                            <source src="dataset/videos/input/1.mp4" type="video/mp4" />
+                        </video>
+                    <!-- </div> -->
+                    <!-- <img id="content" src="dataset/images/input/5.png" style="border-radius: 15px 0 0 15px;" alt="Displayed Image 1"> -->
+                    <img id="vid-style" src="dataset/videos/style/1.png" style="border-radius: 0 15px 15px 0;" alt="Displayed Image 2">
+                </div>
+
+                <div class="vid-comparison">
+                    <div class="vid-container">
+                        <video id="before-vid" class="before-vid" autoplay loop muted playsinline>
+                            <source src="dataset/videos/input/1.mp4" type="video/mp4" />
+                        </video>
+                        <video id="after-vid" class="after-vid" autoplay loop muted playsinline>
+                            <source src="asset/videos/1.mp4" type="video/mp4" />
+                        </video>
+                        
+                        <div class="vslider-line"></div>
+						<div class="vslider-icon">
+							<svg 
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-6 h-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+								/>
+							</svg>
+						</div>
+						
+						<input type="range" class="vslider" min="0" max="100" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h4 class="text-center" style="font-weight: bolder;margin-top: 20px;margin-bottom: 0px;">
+                    NeRF Style Transfer Comparison
+                </h4>
+
+                <div class="image-labels">
+                    <h5 style="font-weight: normal">Input</h5>
+                    <h5 style="font-weight: normal">Style</h5>
+                </div>
+
+                <div class="vid-image-display">
+                    <!-- <div> -->
+                        <video id="vid-content" autoplay loop muted playsinline>
+                            <source src="dataset/videos/input/3.mp4" type="video/mp4" />
+                        </video>
+                    <!-- </div> -->
+                    <!-- <img id="content" src="dataset/images/input/5.png" style="border-radius: 15px 0 0 15px;" alt="Displayed Image 1"> -->
+                    <img id="vid-style" src="dataset/videos/style/3.jpg" style="border-radius: 0 15px 15px 0;" alt="Displayed Image 2">
+                </div>
+
+                <div class="nerf-comparison">
+                    <div class="nerf-container">
+                        <video id="before-nerf" class="before-nerf" autoplay loop muted playsinline>
+                            <source src="asset/videos/day.mp4" type="video/mp4" />
+                        </video>
+                        <video id="after-nerf" class="after-nerf" autoplay loop muted playsinline>
+                            <source src="asset/videos/night.mp4" type="video/mp4" />
+                        </video>
+                        
+                        <div class="nslider-line"></div>
+						<div class="nslider-icon">
+							<svg 
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-6 h-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+								/>
+							</svg>
+						</div>
+						
+						<input type="range" class="nslider" min="0" max="100" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="text-center" style="font-weight: normal;">
+                    Approach
+                </h3>
+                <hr style="margin-top: 0;">
+                <h4 class="text-center" style="font-weight: bolder">
+                    Instant Photorealistic Style Transfer (IPST) Pipeline
+                </h4>
+                <image src="./asset/pipeline.png" class="img-responsive" alt="overview"><br>
+                <p class="text-justify">
+                    <strong>Overview of Instant Photorealistic Style Transfer (IPST) pipeline and instance-adaptive optimization</strong>. 
+                    IPST consists of a key component and is divided into two stages: the StyleNet, and the stages of training and inference. The StyleNet takes a single image as input and generates the transferred output. In the initial training stage, the output of StyleNet cannot accurately capture the desired transformation due to its limited training. However, as the training progresses, StyleNet becomes capable of generating outputs that closely mirror the style reference image.
+                    Throughout the training process, we employ an instance-adaptive optimization method including an instance-adaptive coefficient $\alpha$ and an early stopping technique, which collectively accelerate the training process.
+                    For the task of image transfer, only the training stage is required. In cases where a set of images with contextual consistency serves as input, the first image goes through the training stage, while the subsequent images undergo the inference stage. During the inference stage, the StyleNet, now equipped with learned style transformation, is directly applied to the following images.                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h4 class="text-center" style="font-weight: bolder;">
+                    Lightweight Photorealistic StyleNet
+                </h4>
+                <image src="./asset/stylenet.png" class="img-responsive" alt="overview"><br>
+                <p class="text-justify">
+                    <strong> Architecture of Lightweight Photorealistic StyleNet.</strong> 
+                    The StyleNet operates through a sequential process. 
+                    1) It begins by normalizing the given input using the mean and standard deviation values derived from the ImageNet dataset. The StyleNet then diverges into two branches: a style transfer branch and a content shortcut branch. 
+                    2) Within the style transfer branch, the input is downsampled to the SD (480p) resolution, ensuring the resolution-agnosticism and effective computation of the network.  The style branch comprises a lightweight and compact neural network designed for applying color transformation. Notably, the transformations exclusively manipulate input channels while preserving the spatial information untouched. The outcome of this diminutive neural network is a color transformation mask, which is subsequently upsampled to match the original resolution, serving as the ultimate output from the style transfer branch. 
+                    Concurrently, the content shortcut branch executes an identity mapping process, thereby aiding the preservation of non-color information within the StyleNet. 
+                    3) Upon completing their respective tasks, the outputs from the two branches are added and then denormalized to generate the final output.                </p>
+            </div>
+        </div>
+
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="text-center" style="font-weight: normal;">
+                    BibTex
+                </h3>
+                <hr style="margin-top: 0;">
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@misc{liu2023instant,
+    title={Instant Photorealistic Style Transfer: A Lightweight and Adaptive Approach}, 
+    author={Rong Liu and Enyu Zhao and Zhiyuan Liu and Andrew Wei-Wen Feng and Scott John Easley},
+    year={2023},
+    eprint={2309.10011},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+                </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
