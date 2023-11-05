@@ -1,22 +1,8 @@
 <h1 align="center"> Instant Photorealistic Style Transfer:<br /> A Lightweight and Adaptive Approach </h1>
-<p align="center">
-<a style="color:#000000;" href="https://rongliu-leo.github.io/">Rong Liu<sup>1,2</sup></a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a style="color:#000000;" href="https://www.linkedin.com/in/enyu-zhao-564566250/">Enyu Zhao<sup>1</sup></a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a style="color:#000000;" href="https://www.linkedin.com/in/liuzy98/">Zhiyuan Liu<sup>1</sup></a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a style="color:#000000;" href="https://scholar.google.com/citations?user=JKWxGfsAAAAJ&hl=en">Andrew Feng<sup>2</sup></a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a style="color:#000000;" href="https://viterbi.usc.edu/directory/faculty/Easley/Scott">Scott John Easley<sup>1</sup></a>
-</p>
+
 
 <p align="center">
-<a href="https://www.usc.edu/"><sup>1</sup>University of Southern California</a> 
-</p>
-
-<p align="center">
-<a href="https://ict.usc.edu/"><sup>2</sup>USC Institute for Creative Technologies</a> 
-</p>
-
-<p align="center">
-<a href="https://rongliu-leo.github.io/Video-Style-Transfer/">Project Page</a>
+<a href="https://rongliu-leo.github.io/IPST/">Project Page</a>
 <a>  |  </a>
 <a href="https://arxiv.org/abs/2309.10011">Paper</a> 
 </p>
