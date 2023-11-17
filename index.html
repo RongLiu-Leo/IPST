@@ -310,7 +310,7 @@
                 <p class="text-justify">
                     <strong>Overview of Instant Photorealistic Style Transfer (IPST) pipeline and instance-adaptive optimization</strong>. 
                     IPST consists of a key component and is divided into two stages: the StyleNet, and the stages of training and inference. The StyleNet takes a single image as input and generates the transferred output. In the initial training stage, the output of StyleNet cannot accurately capture the desired transformation due to its limited training. However, as the training progresses, StyleNet becomes capable of generating outputs that closely mirror the style reference image.
-                    Throughout the training process, we employ an instance-adaptive optimization method including an instance-adaptive coefficient $\alpha$ and an early stopping technique, which collectively accelerate the training process.
+                    Throughout the training process, we employ an instance-adaptive optimization method including an instance-adaptive coefficient &alpha; and an early stopping technique, which collectively accelerate the training process.
                     For the task of image transfer, only the training stage is required. In cases where a set of images with contextual consistency serves as input, the first image goes through the training stage, while the subsequent images undergo the inference stage. During the inference stage, the StyleNet, now equipped with learned style transformation, is directly applied to the following images.                </p>
             </div>
         </div>
